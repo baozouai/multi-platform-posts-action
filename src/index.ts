@@ -3,8 +3,7 @@ import * as core from '@actions/core'
 import type { SupportPlatform } from './type'
 import getPostList from './util/get_list'
 import { getTimeDiffString } from './util/time'
-
-const ASSETS_PATH = 'https://raw.githubusercontent.com/baozouai/multi-platform-posts-action/main/assets'
+import { getAssetUrl } from './util/asset'
 
 const SUPPORT_PLAT_FORM = [
   /** 掘金 */
@@ -17,6 +16,12 @@ const SUPPORT_PLAT_FORM = [
   'yuque',
 ]
 
+const iconUrl = {
+  juejin: 'juejin.svg',
+  yuque: 'yuque.png',
+  zhihu: 'zhihu.ico',
+  segmentfault: 'segmentfault.ico',
+}
 async function main(): Promise<void> {
   // 读取参数: 用户 ID
   const USER_ID = core.getInput('user_id')
@@ -35,11 +40,12 @@ async function main(): Promise<void> {
     const reduceText = commonPosts.reduce<string>((total, item) => {
       const { title, publish_time, link, star, collect } = item
       const time = getTimeDiffString(publish_time)
-      return `${total}\n<li>[${time} <img src="${ASSETS_PATH}/star.svg" width='14px'/>：${star}  ${collect === null ? '' : `<img src="${ASSETS_PATH}/collect.svg"  width='20px'/>：${collect}`}]
+      return `${total}\n<li>[${time} <img src="${getAssetUrl('star.svg')}" width='14px'/>：${star}  ${collect === null ? '' : `<img src="${getAssetUrl('collect.svg')}"  width='20px'/>：${collect}`}]
       <a href="${link}" target="_blank">${title}</a>
       </li>`
     }, '')
-    const appendHtml = `\n<ul>${reduceText}\n</ul>\n`
+    const platformSvgUrl = getAssetUrl(iconUrl[PLAT_FORM])
+    const appendHtml = `<div align="center"><img src='${platformSvgUrl}' alt='${PLAT_FORM}'/></div>\n<ul>${reduceText}\n</ul>\n`
 
     core.info(`3. 读取 README, 在 <!-- multi-platform-posts start --> 和 <!-- multi-platform-posts end --> 中间插入生成的 html: \n ${appendHtml}`)
 
