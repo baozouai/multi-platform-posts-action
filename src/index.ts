@@ -40,12 +40,20 @@ async function main(): Promise<void> {
     const reduceText = commonPosts.reduce<string>((total, item) => {
       const { title, publish_time, link, star, collect } = item
       const time = getTimeDiffString(publish_time)
-      return `${total}\n<li>[${time} <img src="${getAssetUrl('star.svg')}" width='14px'/>：${star}  ${collect === null ? '' : `<img src="${getAssetUrl('collect.svg')}"  width='20px'/>：${collect}`}]
+      return `${total}\n<li align='left'>[${time} <img src="${getAssetUrl('star.svg')}" width='14px'/>：${star}  ${collect === null ? '' : `<img src="${getAssetUrl('collect.svg')}"  width='20px'/>：${collect}`}]
       <a href="${link}" target="_blank">${title}</a>
       </li>`
     }, '')
     const platformSvgUrl = getAssetUrl(iconUrl[PLAT_FORM])
-    const appendHtml = `<div align="center"><img src='${platformSvgUrl}' alt='${PLAT_FORM}'/></div>\n<ul>${reduceText}\n</ul>\n`
+    const appendHtml = `
+    <table align="center">
+      <tr>
+        <td align="center" width="800px" valign="top">
+          <div align="center"><img src='${platformSvgUrl}' alt='${PLAT_FORM}'/></div>\n<ul>${reduceText}\n</ul>
+        </td>
+      </tr>
+    </table>
+    `
 
     core.info(`3. 读取 README, 在 <!-- multi-platform-posts start --> 和 <!-- multi-platform-posts end --> 中间插入生成的 html: \n ${appendHtml}`)
 
