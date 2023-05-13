@@ -2,7 +2,7 @@
 
 ## 灵感来源
 
-受到 [KunLunXu-CC/juejin-posts-action](https://github.com/KunLunXu-CC/juejin-posts-action) 的启发，但用了发现只生成了文章链接，不支持点赞数、收藏数、多平台等功能，所以打算自己实现一个。
+受到 [KunLunXu-CC/juejin-posts-action](https://github.com/KunLunXu-CC/juejin-posts-action) 的启发，但用了发现只生成了文章链接，不支持点赞数、收藏数、多平台等功能，所以自己实现一个。
 
 ## 使用方法
 
@@ -66,15 +66,4 @@ jobs:
         with:
           default_author: github_actions
           message: juejin-posts
-  # 成统计图, see: https://github.com/lowlighter/metrics
-  github-metrics:
-    runs-on: ubuntu-latest
-    steps:
-      - name: metrics-Half-year-calendar
-        uses: lowlighter/metrics@latest
-        with:
-          base: ''
-          filename: assets/metrics.plugin.isocalendar.svg
-          token: ${{ github.token }}
-          plugin_isocalendar: yes
 ```
