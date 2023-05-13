@@ -14,6 +14,18 @@
 <!-- multi-platform-posts end -->
 ```
 
+2. 拿到不同平台的id，填入下面的baozouai/multi-platform-posts-action@main的user_id
+
+   - 掘金：![](./assets/juejin_id.png)
+
+   - 知乎![](./assets/zhihu_id.png)
+
+   - 语雀 ![](./assets/yuque_id.png)
+
+   - 思否 ![](./assets/segmentfault_id.png)
+
+     
+
 2. 设置工作流（[可参照我的](https://github.com/baozouai/baozouai/blob/master/.github/workflows/update_readme.yml))
 
 ```yaml
@@ -45,8 +57,8 @@ jobs:
       - name: Append Juejin Posts List 📚
         uses: baozouai/multi-platform-posts-action@main
         with: 
-          user_id: "3526889034488174"
-          platform: juejin
+          user_id: "3526889034488174" # 上面拿到不同平台的id后，填入这里
+          platform: juejin # 这里填写不同的平台，有juejin, zhihu, yuque, segmentfault
 
       - run: |
           git pull
