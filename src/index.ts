@@ -46,7 +46,7 @@ async function main(): Promise<void> {
     }, '')
     const platformSvgUrl = getAssetUrl(iconUrl[PLAT_FORM])
     const appendHtml = `
-    <table align="center">
+  <table align="center">
       <tr>
         <td align="center" width="800px" valign="top">
           <div align="center"><img src='${platformSvgUrl}' alt='${PLAT_FORM}'/></div>\n<ul>${reduceText}\n</ul>
