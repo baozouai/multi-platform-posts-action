@@ -1,5 +1,8 @@
 # 在 README 中生成不同平台的最近文章，支持掘金、知乎、语雀、思否
 
+## 灵感来源
+
+受到 [KunLunXu-CC/juejin-posts-action](https://github.com/KunLunXu-CC/juejin-posts-action) 的启发，但用了发现只生成了文章链接，不支持点赞数、收藏数、多平台等功能，所以打算自己实现一个。
 
 ## 使用方法
 
@@ -11,30 +14,56 @@
 <!-- multi-platform-posts end -->
 ```
 
-2. 设置工作流
+2. 设置工作流（[可参照我的](https://github.com/baozouai/baozouai/blob/master/.github/workflows/update_readme.yml))
 
 ```yaml
+# 工作流名称
+name: Update Readme
+
+# 工作流触发时机, see: https://docs.github.com/zh/actions/using-workflows/triggering-a-workflow
+# 触发条件修改为: 当 main 分支有 push 操作 || 每天 0 点
+on:
+  schedule:
+    - cron: '30 22 * * *'
+  push:
+    branches: 
+      - master
+      - feature/zhihu  
+      - feature/yuque  
+      - feature/segmentfault  
+
+# 作业, see: https://docs.github.com/zh/actions/using-jobs/using-jobs-in-a-workflow
 jobs:
-  multi-platform-posts:
-    runs-on: ubuntu-latest
+
+  # 插入掘金列表, 使用 baozouai/multi-platform-posts-action 生成文章列表, see: https://github.com/baozouai/multi-platform-posts-action
+  juejin-posts: 
+    runs-on: ubuntu-latest    
     steps:
-      # 使用 actions/checkout 拉取仓库, see: https://github.com/actions/checkout
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 使用 baozouai/multi-platform-posts-action 生成文章列表,
-      # see: https://github.com/baozouai/multi-platform-posts-action
-      - name: Append multi-platform-posts Posts List 📚
+      - name: Append Juejin Posts List 📚
         uses: baozouai/multi-platform-posts-action@main
-        with:
-          user_id: '4459274891717223' # add your userid
-          platform: juejin # juejin | zhihu | yuque | segmentfault
+        with: 
+          user_id: "3526889034488174"
+          platform: juejin
+
       - run: |
           git pull
       - name: Push to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          branch: main
           default_author: github_actions
-          message: juejin-posts # or yuque-posts; zhihu-posts; segmentfault-posts
+          message: 'juejin-posts'
+  # 成统计图, see: https://github.com/lowlighter/metrics
+  github-metrics: 
+    runs-on: ubuntu-latest    
+    steps:
+      - name: metrics-Half-year-calendar
+        uses: lowlighter/metrics@latest
+        with:
+          base: ""
+          filename: assets/metrics.plugin.isocalendar.svg
+          token: ${{ github.token }}
+          plugin_isocalendar: yes
 ```
