@@ -4,6 +4,8 @@ import type { SupportPlatform } from './type'
 import getPostList from './util/get_list'
 import { getTimeDiffString } from './util/time'
 
+const ASSETS_PATH = 'https://raw.githubusercontent.com/baozouai/multi-platform-posts-action/main/assets'
+
 const SUPPORT_PLAT_FORM = [
   /** 掘金 */
   'juejin',
@@ -33,7 +35,7 @@ async function main(): Promise<void> {
     const reduceText = commonPosts.reduce<string>((total, item) => {
       const { title, publish_time, link, star, collect } = item
       const time = getTimeDiffString(publish_time)
-      return `${total}\n<li>[${time} <img src="./assets/star.svg" width='14px'/>：${star}  ${collect === null ? '' : `<img src="./assets/collect.svg"  width='20px'/>：${collect}`}]
+      return `${total}\n<li>[${time} <img src="${ASSETS_PATH}/star.svg" width='14px'/>：${star}  ${collect === null ? '' : `<img src="${ASSETS_PATH}/collect.svg"  width='20px'/>：${collect}`}]
       <a href="${link}" target="_blank">${title}</a>
       </li>`
     }, '')
