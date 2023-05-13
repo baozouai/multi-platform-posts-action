@@ -9,7 +9,7 @@ inputs:
     required: true
     default: ''
   platform:
-    description: 平台，目前支持掘金、知乎、语雀、思否
+    description: 平台，目前支持掘金、知乎、思否
     required: true
     default: ''
 
