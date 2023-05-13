@@ -1,0 +1,22 @@
+# see: https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+name: Render Multi-platform Posts in Readme
+description: Render Multi-platform Posts in Readme
+
+# 定义当前步骤参数
+inputs:
+  user_id:
+    description: 用户 ID
+    required: true
+    default: ''
+  platform:
+    description: 平台，目前支持掘金、知乎、语雀、思否
+    required: true
+    default: ''
+
+# 向下一个步骤输出参数
+# outputs:
+#   time: # output will be available to future steps
+#     description: 'The message to output'
+runs:
+  using: node16
+  main: lib/index.js
