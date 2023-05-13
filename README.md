@@ -1,4 +1,4 @@
-# 在 README 中生成不同平台的最近文章，支持掘金、知乎、语雀、思否
+# 在 README 中生成不同平台的最近文章，支持掘金、知乎、思否
 
 ## 灵感来源
 
@@ -20,7 +20,7 @@
 
    - 知乎![](./assets/zhihu_id.png)
 
-   - 语雀 ![](./assets/yuque_id.png)
+   <!--- 语雀 ![](./assets/r_id.png)-->
 
    - 思否 ![](./assets/segmentfault_id.png)
 
@@ -38,27 +38,26 @@ on:
   schedule:
     - cron: '30 22 * * *'
   push:
-    branches: 
+    branches:
       - master
-      - feature/zhihu  
-      - feature/yuque  
-      - feature/segmentfault  
+      - feature/zhihu
+      - feature/segmentfault
 
 # 作业, see: https://docs.github.com/zh/actions/using-jobs/using-jobs-in-a-workflow
 jobs:
 
   # 插入掘金列表, 使用 baozouai/multi-platform-posts-action 生成文章列表, see: https://github.com/baozouai/multi-platform-posts-action
-  juejin-posts: 
-    runs-on: ubuntu-latest    
+  juejin-posts:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Append Juejin Posts List 📚
         uses: baozouai/multi-platform-posts-action@main
-        with: 
-          user_id: "3526889034488174" # 上面拿到不同平台的id后，填入这里
-          platform: juejin # 这里填写不同的平台，有juejin, zhihu, yuque, segmentfault
+        with:
+          user_id: '3526889034488174' # 上面拿到不同平台的id后，填入这里
+          platform: juejin # 这里填写不同的平台，有juejin, zhihu, segmentfault
 
       - run: |
           git pull
@@ -66,15 +65,15 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: 'juejin-posts'
+          message: juejin-posts
   # 成统计图, see: https://github.com/lowlighter/metrics
-  github-metrics: 
-    runs-on: ubuntu-latest    
+  github-metrics:
+    runs-on: ubuntu-latest
     steps:
       - name: metrics-Half-year-calendar
         uses: lowlighter/metrics@latest
         with:
-          base: ""
+          base: ''
           filename: assets/metrics.plugin.isocalendar.svg
           token: ${{ github.token }}
           plugin_isocalendar: yes

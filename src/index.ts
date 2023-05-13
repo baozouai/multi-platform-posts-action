@@ -12,8 +12,8 @@ const SUPPORT_PLAT_FORM = [
   'segmentfault',
   /** 知乎 */
   'zhihu',
-  /** 语雀 */
-  'yuque',
+  /** 暂时不支持语雀，最新更新文章获取有点麻烦 */
+  // 'yuque',
 ]
 
 const iconUrl = {
