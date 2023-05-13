@@ -19,7 +19,7 @@ async function main(): Promise<void> {
   // 读取参数: 用户 ID
   const USER_ID = core.getInput('user_id')
   // 读取参数: 平台 PLAT_FORM
-  const PLAT_FORM = (core.getInput('plat_form')) as SupportPlatform
+  const PLAT_FORM = (core.getInput('platform')) as SupportPlatform
   if (!SUPPORT_PLAT_FORM.includes(PLAT_FORM))
     return core.setFailed(`平台: ${PLAT_FORM}暂不支持，请提issue`)
   try {
