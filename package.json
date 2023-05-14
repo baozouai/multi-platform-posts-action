@@ -1,7 +1,7 @@
 {
   "name": "multi-platform-posts-action",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "packageManager": "pnpm@8.3.1",
   "description": "Render multi-platform Posts in readme",
   "author": "https://github.com/baozouai",
