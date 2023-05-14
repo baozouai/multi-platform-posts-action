@@ -40,7 +40,7 @@ async function main(): Promise<void> {
     const reduceText = commonPosts.reduce<string>((total, item) => {
       const { title, publish_time, link, star, collect } = item
       const time = getTimeDiffString(publish_time)
-      return `${total}\n<li align='left'>[${time} <img src="${getAssetUrl('star.svg')}" width='14px'/>：${star}  ${collect === null ? '' : '⭐'}]
+      return `${total}\n<li align='left'>[${time} 👍：${star}  ${collect === null ? '' : `⭐：${collect}`}]
       <a href="${link}" target="_blank">${title}</a>
       </li>`
     }, '')
