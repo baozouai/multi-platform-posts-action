@@ -1,10 +1,34 @@
-#  同步不同平台的最近文章到github首页，支持掘金、知乎、思否
 
-## 灵感来源
+<p align="center">
+<h1 align="center">multi-platform-posts-action</h1>
+</p>
 
-受到 [KunLunXu-CC/juejin-posts-action](https://github.com/KunLunXu-CC/juejin-posts-action) 的启发，但用了发现只生成了文章链接，不支持点赞数、收藏数、多平台等功能，所以自己实现一个。
+<div align="center">
+  同步不同平台的最近文章到github首页，支持掘金、知乎、思否
 
-## 使用方法
+<br/>
+<br/>
+
+![ci][ci-badge]
+
+[ci-badge]: https://github.com/baozouai/multi-platform-posts-action/actions/workflows/ci.yml/badge.svg
+
+
+中文 | [English](./README%20_EN.md)
+
+</div>
+
+
+## 💡 灵感来源
+受到 👉 [KunLunXu-CC/juejin-posts-action](https://github.com/KunLunXu-CC/juejin-posts-action) 的启发，但用了发现只生成了文章链接，不支持点赞数、收藏数、多平台等功能，所以自己实现一个。
+
+## ✨功能
+
+- 多平台，目前支持**掘金、知乎、思否**（本来做好了语雀的，但发现语雀接口很奇怪，没法拿到正确的文章链接，所以暂时取消支持语雀的功能）
+- 支持生成不同平台的 icon![](./assets/juejin.svg) ![](./assets/zhihu.ico) ![](./assets/segmentfault.ico)
+- 支持点赞数 👍🏻
+- 支持收藏数 ⭐（目前只有掘金有，知乎、思否接口比较麻烦，暂且不做）
+ ## 🔨 使用
 
 1. 在 `README` 中任意位置添加标志位
 
@@ -67,3 +91,24 @@ jobs:
           default_author: github_actions
           message: juejin-posts
 ```
+
+4. 触发工作流，自动同步文章
+
+上面配置完成后，push 后就会触发 action，然后对应平台就会生成相应的 icon、时间、点赞数、收藏数、文章链接，例子如下：
+
+![](./assets/readme_branch.png)
+
+- 掘金
+
+![](./assets/juejin_example.png)
+
+- 知乎
+
+![](./assets/zhihu_example.png)
+
+- 思否
+
+![](./assets/segmentfault_example.png)
+## 📄 协议
+
+multi-platform-posts-action 遵循 [MIT 协议](./LICENSE).
